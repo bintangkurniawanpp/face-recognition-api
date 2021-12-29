@@ -11,4 +11,9 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DATABASE
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
+    PROPAGATE_EXCEPTIONS = True
+    # JWT_BLACKLIST_ENABLED = True
+    # JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    JWT_SECRET_KEY = 'secret'
+    
     

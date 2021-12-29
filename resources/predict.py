@@ -13,8 +13,8 @@ import cv2
 # Flask
 from flask import request
 from flask_restful import Resource, Api
-# from app import db
-# from sqlalchemy import text
+from app import db
+from sqlalchemy import text
 
 from model.user import UserModel
 
@@ -29,19 +29,19 @@ class Predict(Resource):
 
         # face_classifier = keras.models.load_model(f'../ml_models/{model_name}')
         face_classifier = keras.models.load_model(f'./ml_models/{model_name}')
-        class_names = ['abizar', 'bintang', 'muchdor']
-        # def get_class_name_from_db():
-        #     try:
-        #         sql = text('SELECT * FROM class_name')
-        #         result = db.engine.execute(sql)
-        #         class_names = []
-        #         for row in result:
-        #             class_names.append(row[1])
-        #         return class_names
-        #     except Exception as e:
-        #         print(e)
-        #         return None  
-        # class_names = get_class_name_from_db()
+        # class_names = ['abizar', 'bintang', 'muchdor']
+        def get_class_name_from_db():
+            try:
+                sql = text('SELECT * FROM users')
+                result = db.engine.execute(sql)
+                class_names = []
+                for row in result:
+                    class_names.append(row[1])
+                return class_names
+            except Exception as e:
+                print(e)
+                return None  
+        class_names = get_class_name_from_db()
 
         def get_extended_image(img, x, y, w, h, k=0.1):
             if x - k*w > 0:
