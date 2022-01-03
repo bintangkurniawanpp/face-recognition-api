@@ -55,12 +55,9 @@ class User(Resource):
 class UserLogin(Resource):
     def post(self):
         data = _user_parser.parse_args()
-
         user = UserModel.find_by_username(data['username'])
 
-        # this is what the `authenticate()` function did in security.py
         if user and safe_str_cmp(user.password, data['password']):
-            # identity= is what the identity() function did in security.py—now stored in the JWT
             access_token = create_access_token(identity=user.id, fresh=True) 
             refresh_token = create_refresh_token(user.id)
             return {

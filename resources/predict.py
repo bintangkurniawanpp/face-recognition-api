@@ -2,8 +2,7 @@
 import numpy as np
 from PIL import Image
 
-# TensorFlow imports
-# may differs from version to versions
+# TensorFlow 
 import tensorflow as tf
 from tensorflow import keras
 
@@ -76,12 +75,7 @@ class Predict(Resource):
         )
 
         for (x, y, w, h) in faces:
-            # for each face on the image detected by OpenCV
-            # get extended image of this face
             face_image = get_extended_image(npimg, x, y, w, h, 0.5)
-
-            # classify face and draw a rectangle around the face
-            # green for positive class and red for negative
             result = face_classifier.predict(face_image)
             prediction = class_names[np.array(
                 result[0]).argmax(axis=0)]  # predicted class
